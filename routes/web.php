@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SaldoController;
+use App\Http\Controllers\TopupController;
 use Illuminate\Support\Facades\Route;
 
 // ── Root ─────────────────────────────────────────────────────────────────────
@@ -21,4 +23,34 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // ── Protected ────────────────────────────────────────────────────────────────
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // ── Saldo ────────────────────────────────────────────────────────────────
+    Route::get ('/saldo',            [SaldoController::class, 'index'])->name('saldo');
+    Route::post('/saldo/qris',       [SaldoController::class, 'showQris'])->name('saldo.qris');
+    Route::post('/saldo/confirm',    [SaldoController::class, 'confirmTopup'])->name('saldo.confirm');
+
+    // ── Top-up ───────────────────────────────────────────────────────────────
+    Route::get ('/topup/mobile-legends', [TopupController::class, 'mobileLegends'])->name('topup.ml');
+    Route::post('/topup/mobile-legends', [TopupController::class, 'processMl'])->name('topup.ml.process');
+
+    Route::get ('/topup/free-fire',      [TopupController::class, 'freeFire'])->name('topup.ff');
+    Route::post('/topup/free-fire',      [TopupController::class, 'processFf'])->name('topup.ff.process');
+
+    Route::get ('/topup/pubg',           [TopupController::class, 'pubg'])->name('topup.pubg');
+    Route::post('/topup/pubg',           [TopupController::class, 'processPubg'])->name('topup.pubg.process');
+
+    Route::get ('/topup/genshin',        [TopupController::class, 'genshin'])->name('topup.genshin');
+    Route::post('/topup/genshin',        [TopupController::class, 'processGenshin'])->name('topup.genshin.process');
+
+    Route::get ('/topup/valorant',       [TopupController::class, 'valorant'])->name('topup.valorant');
+    Route::post('/topup/valorant',       [TopupController::class, 'processValorant'])->name('topup.valorant.process');
+
+    Route::get ('/topup/honkai-sr',      [TopupController::class, 'honkaiSr'])->name('topup.honkai');
+    Route::post('/topup/honkai-sr',      [TopupController::class, 'processHonkai'])->name('topup.honkai.process');
+
+    Route::get ('/topup/cod',            [TopupController::class, 'cod'])->name('topup.cod');
+    Route::post('/topup/cod',            [TopupController::class, 'processCod'])->name('topup.cod.process');
+
+    Route::get ('/topup/coc',            [TopupController::class, 'coc'])->name('topup.coc');
+    Route::post('/topup/coc',            [TopupController::class, 'processCoc'])->name('topup.coc.process');
 });

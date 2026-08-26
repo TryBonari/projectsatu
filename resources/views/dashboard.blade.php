@@ -262,9 +262,15 @@
         /* ── Game grid ── */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             margin-bottom: 36px;
+        }
+        @media (max-width: 700px) {
+            .game-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 380px) {
+            .game-grid { grid-template-columns: repeat(1, 1fr); }
         }
         .game-card {
             background: rgba(255,255,255,0.04);
@@ -446,17 +452,17 @@
             <h2>Selamat datang, {{ explode(' ', $user->name)[0] }} 👋</h2>
             <p>{{ $user->email }}</p>
         </div>
-        <div class="saldo-card">
+        <a href="{{ route('saldo') }}" class="saldo-card" style="text-decoration:none;display:block;">
             <div class="saldo-label">Saldo Akun</div>
             <div class="saldo-value">Rp {{ number_format($user->saldo, 0, ',', '.') }}</div>
-            <div class="saldo-sub">{{ $user->phone ?? 'No HP belum diisi' }}</div>
-        </div>
+            <div class="saldo-sub">Klik untuk kelola saldo →</div>
+        </a>
     </div>
 
     <!-- Game List -->
     <div class="section-title">Top-Up Game</div>
     <div class="game-grid">
-        <a href="#" class="game-card">
+        <a href="{{ route('topup.ml') }}" class="game-card">
             <div class="game-icon">
                 <img src="{{ asset('images/games/mobile-legends.png') }}" alt="Mobile Legends">
             </div>
