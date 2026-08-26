@@ -1,0 +1,227 @@
+/* ================================================================
+   shared.css — Gaya dasar yang dipakai di seluruh halaman
+   ================================================================ */
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base body ── */
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0b0e1a;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* ── Ambient orbs (background decoration) ── */
+body::before {
+    content: '';
+    position: fixed;
+    top: -220px; left: -220px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(99,57,255,0.16) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+}
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,194,255,0.12) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+}
+
+/* ── Navbar ── */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,14,26,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+.nav-brand-icon {
+    width: 32px; height: 32px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #6339ff 0%, #00c2ff 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.nav-brand-icon svg { width: 16px; height: 16px; fill: #fff; }
+.nav-brand span {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.2px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+}
+.nav-links a svg {
+    width: 15px; height: 15px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+}
+.nav-links a:hover { color: #ffffff; background: rgba(255,255,255,0.07); }
+.nav-links a.active { color: #a78bff; background: rgba(99,57,255,0.15); }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.nav-greeting {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+}
+.nav-greeting strong { color: #ffffff; font-weight: 600; }
+
+.nav-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6339ff, #00c2ff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s, box-shadow 0.2s;
+}
+.nav-avatar:hover {
+    opacity: 0.85;
+    box-shadow: 0 0 0 3px rgba(99,57,255,0.4);
+}
+
+.btn-logout {
+    padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    font-size: 12.5px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    display: flex; align-items: center; gap: 6px;
+}
+.btn-logout svg {
+    width: 14px; height: 14px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round; stroke-linejoin: round;
+}
+.btn-logout:hover { background: rgba(255,255,255,0.07); color: #fff; }
+
+/* Tombol kembali (dipakai di saldo-qris & topup) */
+.nav-back {
+    display: flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5); font-size: 13px;
+    text-decoration: none; font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nav-back:hover { background: rgba(255,255,255,0.07); color: #fff; }
+
+/* Saldo mini di navbar topup */
+.nav-saldo { font-size: 13px; color: rgba(255,255,255,0.45); }
+.nav-saldo strong { color: #a78bff; font-weight: 700; }
+
+/* ── Mobile navbar toggle ── */
+.nav-mobile-toggle { display: none; }
+
+@media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 60px; left: 0; right: 0;
+        background: rgba(11,14,26,0.97);
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        padding: 12px 16px;
+        gap: 4px;
+    }
+    .nav-links.open a { width: 100%; }
+    .nav-mobile-toggle {
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.6);
+        cursor: pointer;
+        padding: 6px;
+    }
+    .nav-mobile-toggle svg {
+        width: 20px; height: 20px;
+        stroke: currentColor; fill: none;
+        stroke-width: 2; stroke-linecap: round;
+    }
+}
+
+/* ── Alert messages ── */
+.alert {
+    display: flex; align-items: center; gap: 8px;
+    border-radius: 10px; padding: 12px 16px;
+    font-size: 13px; margin-bottom: 24px;
+}
+.alert svg {
+    width: 15px; height: 15px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+}
+.alert-success { background: rgba(34,197,94,0.10);  border: 1px solid rgba(34,197,94,0.25); color: #86efac; }
+.alert-error   { background: rgba(239,68,68,0.12);  border: 1px solid rgba(239,68,68,0.3);  color: #fca5a5; }
+
+/* ── Section title (heading kecil uppercase) ── */
+.section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 14px;
+}
+
+/* ── Field error ── */
+.field-error {
+    font-size: 12px;
+    color: #f87171;
+    margin-top: 6px;
+    padding-left: 2px;
+}

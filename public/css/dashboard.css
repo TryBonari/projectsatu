@@ -1,0 +1,167 @@
+/* ================================================================
+   dashboard.css — Halaman Dashboard utama
+   ================================================================ */
+
+/* ── Layout halaman ── */
+.page {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 28px 20px 48px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Top row: greeting + saldo card ── */
+.top-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 28px;
+}
+.greeting-block h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+}
+.greeting-block p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.4);
+}
+
+.saldo-card {
+    background: linear-gradient(135deg, rgba(99,57,255,0.25) 0%, rgba(0,194,255,0.15) 100%);
+    border: 1px solid rgba(99,57,255,0.35);
+    border-radius: 14px;
+    padding: 16px 22px;
+    text-align: right;
+    min-width: 200px;
+}
+.saldo-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 6px;
+}
+.saldo-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+.saldo-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 4px;
+}
+
+@media (max-width: 580px) {
+    .top-row { grid-template-columns: 1fr; }
+    .saldo-card { text-align: left; min-width: unset; }
+}
+
+/* ── Game grid ── */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+}
+@media (max-width: 700px) { .game-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 380px) { .game-grid { grid-template-columns: repeat(1, 1fr); } }
+
+.game-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 18px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    text-decoration: none;
+    display: block;
+}
+.game-card:hover {
+    background: rgba(99,57,255,0.1);
+    border-color: rgba(99,57,255,0.4);
+    transform: translateY(-2px);
+}
+.game-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    background: rgba(255,255,255,0.06);
+}
+.game-icon img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+}
+.game-name {
+    font-size: 12.5px; font-weight: 600;
+    color: #ffffff; margin-bottom: 3px;
+}
+.game-desc { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+/* ── Tabel transaksi ── */
+.tx-wrap {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+}
+.tx-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tx-table th {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    padding: 0 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.tx-table td {
+    padding: 13px 12px;
+    font-size: 13.5px; color: rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: middle;
+}
+.tx-table tr:last-child td { border-bottom: none; }
+.tx-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.tx-game-badge { display: inline-flex; align-items: center; gap: 6px; }
+.tx-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tx-amount { font-weight: 600; color: #ffffff; }
+.tx-date { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+.badge-status {
+    display: inline-block;
+    padding: 3px 9px; border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+}
+.badge-success { background: rgba(34,197,94,0.15);  color: #4ade80; }
+.badge-pending { background: rgba(234,179,8,0.15);  color: #facc15; }
+.badge-failed  { background: rgba(239,68,68,0.12);  color: #f87171; }
+
+.empty-tx {
+    text-align: center; padding: 36px 0;
+    color: rgba(255,255,255,0.25); font-size: 13.5px;
+}
+.empty-tx svg {
+    width: 36px; height: 36px;
+    stroke: rgba(255,255,255,0.15); fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    display: block; margin: 0 auto 10px;
+}
+
+@media (max-width: 560px) {
+    .tx-table thead { display: none; }
+    .tx-table td { display: block; padding: 8px 14px; border-bottom: none; }
+    .tx-table tr { display: block; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 10px 0; }
+    .tx-table tr:last-child { border-bottom: none; }
+}

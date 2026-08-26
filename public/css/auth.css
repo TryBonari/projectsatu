@@ -1,0 +1,246 @@
+/* ================================================================
+   auth.css — Halaman Login & Register
+   ================================================================ */
+
+/* Posisi halaman auth: centered */
+body.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 24px 16px;
+}
+body.auth-page.register-page {
+    align-items: flex-start;
+}
+
+/* ── Card utama ── */
+.card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 48px 40px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 1;
+}
+.card--wide { max-width: 440px; }
+
+/* ── Brand / logo ── */
+.brand {
+    text-align: center;
+    margin-bottom: 32px;
+}
+.brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6339ff 0%, #00c2ff 100%);
+    margin-bottom: 16px;
+}
+.brand-icon svg { width: 28px; height: 28px; fill: #fff; }
+.brand h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+}
+.brand p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+}
+
+/* ── Heading form ── */
+.form-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+.form-subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 28px;
+}
+
+/* ── Input group ── */
+.input-group { margin-bottom: 18px; }
+.input-group label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.input-wrap { position: relative; }
+
+/* Icon SVG di dalam input (login) */
+.input-wrap > svg {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    stroke: rgba(255,255,255,0.3); fill: none;
+    stroke-width: 1.8;
+    pointer-events: none;
+}
+
+/* Icon SVG di dalam input (register: pakai class .input-icon) */
+.input-icon {
+    position: absolute;
+    left: 13px; top: 50%;
+    transform: translateY(-50%);
+    width: 15px; height: 15px;
+    stroke: rgba(255,255,255,0.28); fill: none;
+    stroke-width: 1.7;
+    stroke-linecap: round; stroke-linejoin: round;
+    pointer-events: none;
+}
+
+.input-wrap input {
+    width: 100%;
+    padding: 12px 14px 12px 40px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+/* Register input: lebih lebar kanan untuk toggle button */
+.input-wrap input.has-toggle { padding-right: 40px; }
+.input-wrap input::placeholder { color: rgba(255,255,255,0.25); }
+.input-wrap input:focus {
+    border-color: rgba(99,57,255,0.7);
+    background: rgba(99,57,255,0.07);
+}
+
+/* ── Toggle visibility password ── */
+.toggle-pw {
+    position: absolute;
+    right: 12px; top: 50%;
+    transform: translateY(-50%);
+    background: none; border: none; padding: 4px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.3);
+    transition: color 0.2s;
+}
+.toggle-pw:hover { color: rgba(255,255,255,0.7); }
+.toggle-pw svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.8;
+    pointer-events: none;
+}
+
+/* ── Two-column grid (register) ── */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* ── Row remember + forgot (login) ── */
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+.remember {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+}
+.remember input[type="checkbox"] {
+    accent-color: #6339ff;
+    width: 14px; height: 14px;
+    cursor: pointer;
+}
+.forgot {
+    font-size: 13px; color: #7c5cd8;
+    text-decoration: none; font-weight: 500;
+}
+.forgot:hover { color: #00c2ff; }
+
+/* ── Terms checkbox (register) ── */
+.terms {
+    display: flex; align-items: flex-start;
+    gap: 10px; margin-bottom: 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+}
+.terms input[type="checkbox"] {
+    accent-color: #6339ff;
+    width: 14px; height: 14px;
+    margin-top: 2px; flex-shrink: 0; cursor: pointer;
+}
+.terms a { color: #6339ff; text-decoration: none; font-weight: 500; }
+.terms a:hover { color: #00c2ff; }
+
+/* ── Submit button ── */
+.btn-primary {
+    width: 100%;
+    padding: 13px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg, #6339ff 0%, #00c2ff 100%);
+    color: #ffffff;
+    font-size: 14px; font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer; letter-spacing: 0.3px;
+    transition: opacity 0.2s, transform 0.15s;
+}
+.btn-primary:hover  { opacity: 0.88; }
+.btn-primary:active { transform: scale(0.98); }
+
+/* ── Divider ── */
+.divider {
+    display: flex; align-items: center;
+    gap: 12px; margin: 24px 0;
+    color: rgba(255,255,255,0.2);
+    font-size: 12px;
+}
+.divider::before,
+.divider::after {
+    content: ''; flex: 1;
+    height: 1px; background: rgba(255,255,255,0.1);
+}
+
+/* ── Link ke halaman lain ── */
+.register-link,
+.login-link {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+}
+.register-link a,
+.login-link a {
+    color: #6339ff; font-weight: 600; text-decoration: none;
+}
+.register-link a:hover,
+.login-link a:hover { color: #00c2ff; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .card { padding: 36px 24px; border-radius: 16px; }
+    .brand h1 { font-size: 20px; }
+    .form-title { font-size: 16px; }
+    .form-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .grid-2 { grid-template-columns: 1fr; gap: 0; }
+}
+@media (max-width: 360px) {
+    .card { padding: 28px 16px; }
+}

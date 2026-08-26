@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\TopupController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 // ── Root ─────────────────────────────────────────────────────────────────────
@@ -23,6 +24,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // ── Protected ────────────────────────────────────────────────────────────────
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // ── Transaksi ─────────────────────────────────────────────────────────────
+    Route::get('/transaksi',       [TransactionController::class, 'index'])->name('transaksi.index');
+    Route::get('/transaksi/{id}',  [TransactionController::class, 'show'])->name('transaksi.show')->whereNumber('id');
 
     // ── Saldo ────────────────────────────────────────────────────────────────
     Route::get ('/saldo',            [SaldoController::class, 'index'])->name('saldo');

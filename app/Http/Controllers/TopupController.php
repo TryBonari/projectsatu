@@ -135,11 +135,14 @@ class TopupController extends Controller
             $user->refresh();
 
             Transaction::create([
-                'user_id' => $user->id,
-                'game'    => $gameName,
-                'item'    => $package['label'] . ' — ID: ' . $request->user_id_game,
-                'amount'  => $package['amount'],
-                'status'  => 'success',
+                'user_id'        => $user->id,
+                'game'           => $gameName,
+                'item'           => $package['label'],
+                'user_id_game'   => $request->user_id_game,
+                'payment_method' => 'saldo',
+                'admin_fee'      => 0,
+                'amount'         => $package['amount'],
+                'status'         => 'success',
             ]);
 
             SaldoHistory::create([
@@ -183,15 +186,30 @@ class TopupController extends Controller
         if (! $package) return back()->with('error', 'Paket tidak ditemukan.');
         if ($user->saldo < $package['amount']) return back()->with('error', 'Saldo tidak mencukupi.')->withInput();
 
-        $user->decrement('saldo', $package['amount']);
+        DB::transaction(function () use ($user, $package, $request) {
+            $user->decrement('saldo', $package['amount']);
+            $user->refresh();
 
-        Transaction::create([
-            'user_id' => $user->id,
-            'game'    => 'Mobile Legends',
-            'item'    => $package['label'] . ' — ID: ' . $request->user_id_game . '/' . $request->zone_id,
-            'amount'  => $package['amount'],
-            'status'  => 'success',
-        ]);
+            Transaction::create([
+                'user_id'        => $user->id,
+                'game'           => 'Mobile Legends',
+                'item'           => $package['label'],
+                'user_id_game'   => $request->user_id_game . '/' . $request->zone_id,
+                'payment_method' => 'saldo',
+                'admin_fee'      => 0,
+                'amount'         => $package['amount'],
+                'status'         => 'success',
+            ]);
+
+            SaldoHistory::create([
+                'user_id'       => $user->id,
+                'type'          => 'purchase',
+                'description'   => 'Pembelian ' . $package['label'] . ' Mobile Legends',
+                'amount'        => -$package['amount'],
+                'balance_after' => $user->saldo,
+                'status'        => 'success',
+            ]);
+        });
 
         return redirect()->route('dashboard')->with('success', 'Top-up ' . $package['label'] . ' Mobile Legends berhasil! 🎉');
     }

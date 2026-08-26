@@ -1,0 +1,118 @@
+/* ================================================================
+   topup.css — Halaman Top-Up Game
+   ================================================================ */
+
+/* ── Layout halaman ── */
+.page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+    position: relative; z-index: 1;
+}
+
+/* ── Hero banner game ── */
+.hero {
+    display: flex; align-items: center; gap: 20px;
+    background: linear-gradient(135deg, rgba(99,57,255,0.22) 0%, rgba(0,194,255,0.12) 100%);
+    border: 1px solid rgba(99,57,255,0.3);
+    border-radius: 18px; padding: 24px 28px;
+    margin-bottom: 32px;
+}
+.hero-img {
+    width: 72px; height: 72px; border-radius: 16px;
+    overflow: hidden; flex-shrink: 0;
+    background: rgba(255,255,255,0.08);
+}
+.hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-info h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+.hero-info p  { font-size: 13px; color: rgba(255,255,255,0.45); }
+
+/* ── Section label ── */
+.section-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.8px; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 12px;
+}
+
+/* ── Baris input ID akun ── */
+.id-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+@media (max-width: 480px) { .id-row { grid-template-columns: 1fr; } }
+
+.field label {
+    display: block; font-size: 12px; font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.3px; text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.field input {
+    width: 100%; padding: 11px 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; color: #ffffff;
+    font-size: 14px; font-family: 'Inter', sans-serif;
+    outline: none; transition: border-color 0.2s, background 0.2s;
+}
+.field input::placeholder { color: rgba(255,255,255,0.22); }
+.field input:focus {
+    border-color: rgba(99,57,255,0.7);
+    background: rgba(99,57,255,0.07);
+}
+.field-hint { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+.field-error-msg { font-size: 11.5px; color: #f87171; margin-top: 5px; }
+
+/* ── Grid paket nominal ── */
+.pkg-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+}
+@media (max-width: 640px) { .pkg-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 420px) { .pkg-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.pkg-card {
+    position: relative;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 14px 12px;
+    text-align: center; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    background: rgba(255,255,255,0.03);
+    user-select: none;
+}
+.pkg-card:hover {
+    border-color: rgba(99,57,255,0.5);
+    background: rgba(99,57,255,0.08);
+    transform: translateY(-2px);
+}
+.pkg-card.selected {
+    border-color: #6339ff;
+    background: rgba(99,57,255,0.15);
+}
+.pkg-card.selected::after {
+    content: '✓';
+    position: absolute; top: 6px; right: 9px;
+    font-size: 11px; color: #a78bff; font-weight: 700;
+}
+.pkg-card input[type="radio"] {
+    position: absolute; opacity: 0; pointer-events: none;
+}
+.pkg-label { font-size: 12.5px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
+.pkg-price { font-size: 11.5px; color: rgba(255,255,255,0.4); }
+
+/* ── Tombol beli ── */
+.btn-topup {
+    width: 100%; padding: 14px;
+    border: none; border-radius: 10px;
+    background: linear-gradient(135deg, #6339ff 0%, #00c2ff 100%);
+    color: #ffffff; font-size: 14px; font-weight: 700;
+    font-family: 'Inter', sans-serif; cursor: pointer;
+    letter-spacing: 0.2px;
+    transition: opacity 0.2s, transform 0.15s;
+}
+.btn-topup:hover  { opacity: 0.88; }
+.btn-topup:active { transform: scale(0.98); }
