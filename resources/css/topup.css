@@ -17,6 +17,7 @@
     border: 1px solid rgba(99,57,255,0.3);
     border-radius: 18px; padding: 24px 28px;
     margin-bottom: 32px;
+    flex-wrap: wrap;
 }
 .hero-img {
     width: 72px; height: 72px; border-radius: 16px;
@@ -116,3 +117,10 @@
 }
 .btn-topup:hover  { opacity: 0.88; }
 .btn-topup:active { transform: scale(0.98); }
+
+@media (max-width: 480px) {
+    .page { padding: 20px 14px 48px; }
+    .hero { padding: 18px 18px; gap: 14px; }
+    .hero-info h1 { font-size: 17px; }
+    .section-label { font-size: 10px; }
+}

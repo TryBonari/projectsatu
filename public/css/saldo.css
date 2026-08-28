@@ -139,7 +139,9 @@
 .history-wrap {
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px; overflow: hidden;
+    border-radius: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .history-table { width: 100%; border-collapse: collapse; }
 .history-table th {
@@ -178,7 +180,7 @@
 .amount-credit { font-weight: 700; color: #4ade80; }
 .amount-debit  { font-weight: 700; color: #f87171; }
 .balance-col   { font-weight: 600; color: #ffffff; font-size: 13px; }
-.date-col      { font-size: 12px; color: rgba(255,255,255,0.3); white-space: nowrap; }
+.date-col      { font-size: 12px; color: rgba(255,255,255,0.3); }
 .desc-col      { font-size: 13px; color: rgba(255,255,255,0.65); }
 
 .empty-state {
@@ -232,4 +234,13 @@
     .history-table td { display: block; padding: 6px 14px; border-bottom: none; }
     .history-table tr { display: block; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 10px 0; }
     .history-table tr:last-child { border-bottom: none; }
+}
+
+@media (max-width: 480px) {
+    .page { padding: 20px 14px 48px; }
+    .stat-value { font-size: 18px; }
+    .topup-form { flex-direction: column; }
+    .btn-topup-saldo { width: 100%; justify-content: center; }
+    .presets { gap: 6px; }
+    .preset-btn { padding: 6px 10px; font-size: 11.5px; }
 }

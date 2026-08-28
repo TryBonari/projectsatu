@@ -68,7 +68,8 @@
 
 .qris-img-wrap {
     position: relative;
-    width: 240px; height: 240px;
+    width: min(240px, 80vw);
+    height: min(240px, 80vw);
 }
 .qris-img-wrap img {
     width: 100%; height: 100%;
@@ -190,3 +191,13 @@
 }
 .step-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
 .step-text strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+@media (max-width: 480px) {
+    .page { padding: 24px 14px 48px; }
+    .page-title { font-size: 17px; }
+    .amount-badge { padding: 10px 16px; }
+    .amount-value { font-size: 20px; }
+    .qris-card { padding: 18px 16px; }
+    .btn-group { gap: 8px; }
+    .timer-wrap { padding: 10px 14px; flex-wrap: wrap; justify-content: center; gap: 6px; }
+}

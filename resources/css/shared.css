@@ -11,6 +11,7 @@ body {
     background: #0b0e1a;
     color: #ffffff;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* ── Ambient orbs (background decoration) ── */
@@ -51,6 +52,7 @@ body::after {
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    flex-shrink: 0;
 }
 .nav-brand-icon {
     width: 32px; height: 32px;
@@ -98,10 +100,15 @@ body::after {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
 }
 .nav-greeting {
     font-size: 13px;
     color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
 }
 .nav-greeting strong { color: #ffffff; font-weight: 600; }
 
@@ -135,6 +142,7 @@ body::after {
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
     display: flex; align-items: center; gap: 6px;
+    white-space: nowrap;
 }
 .btn-logout svg {
     width: 14px; height: 14px;
@@ -152,19 +160,25 @@ body::after {
     color: rgba(255,255,255,0.5); font-size: 13px;
     text-decoration: none; font-weight: 500;
     transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
 }
 .nav-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .nav-back:hover { background: rgba(255,255,255,0.07); color: #fff; }
 
 /* Saldo mini di navbar topup */
-.nav-saldo { font-size: 13px; color: rgba(255,255,255,0.45); }
+.nav-saldo { font-size: 13px; color: rgba(255,255,255,0.45); white-space: nowrap; }
 .nav-saldo strong { color: #a78bff; font-weight: 700; }
 
 /* ── Mobile navbar toggle ── */
 .nav-mobile-toggle { display: none; }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
+    .navbar { padding: 0 16px; }
+
+    /* Hide desktop nav links */
     .nav-links { display: none; }
+
+    /* Dropdown menu when open */
     .nav-links.open {
         display: flex;
         flex-direction: column;
@@ -175,8 +189,11 @@ body::after {
         border-bottom: 1px solid rgba(255,255,255,0.07);
         padding: 12px 16px;
         gap: 4px;
+        z-index: 99;
     }
-    .nav-links.open a { width: 100%; }
+    .nav-links.open a { width: 100%; padding: 10px 12px; }
+
+    /* Show hamburger */
     .nav-mobile-toggle {
         display: flex;
         align-items: center;
@@ -185,12 +202,25 @@ body::after {
         color: rgba(255,255,255,0.6);
         cursor: pointer;
         padding: 6px;
+        flex-shrink: 0;
     }
     .nav-mobile-toggle svg {
-        width: 20px; height: 20px;
+        width: 22px; height: 22px;
         stroke: currentColor; fill: none;
         stroke-width: 2; stroke-linecap: round;
     }
+
+    /* Hide greeting text on small screens — keep avatar & logout */
+    .nav-greeting { display: none; }
+
+    /* Shrink logout button on mobile */
+    .btn-logout span { display: none; }
+    .btn-logout { padding: 7px 10px; gap: 0; }
+}
+
+@media (max-width: 480px) {
+    /* On very small screens, hide logout text label (only icon remains) */
+    .nav-saldo { display: none; }
 }
 
 /* ── Alert messages ── */
@@ -225,3 +255,7 @@ body::after {
     margin-top: 6px;
     padding-left: 2px;
 }
+
+/* ── Global overflow prevention ── */
+img, svg { max-width: 100%; }
+table { max-width: 100%; }
