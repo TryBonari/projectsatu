@@ -105,6 +105,66 @@
 .pkg-label { font-size: 12.5px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
 .pkg-price { font-size: 11.5px; color: rgba(255,255,255,0.4); }
 
+/* ── Jumlah pembelian ── */
+.qty-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+.qty-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+}
+.qty-btn {
+    width: 40px; height: 40px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+}
+.qty-btn svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round;
+    pointer-events: none;
+}
+.qty-btn:hover { background: rgba(99,57,255,0.15); color: #a78bff; }
+.qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+#qtyInput {
+    width: 52px; height: 40px;
+    background: none;
+    border: none;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
+    color: #ffffff;
+    font-size: 15px; font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    outline: none;
+    -moz-appearance: textfield;
+}
+#qtyInput::-webkit-outer-spin-button,
+#qtyInput::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.qty-total {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.45);
+}
+.qty-total span {
+    font-weight: 700;
+    color: #a78bff;
+}
+
 /* ── Tombol beli ── */
 .btn-topup {
     width: 100%; padding: 14px;

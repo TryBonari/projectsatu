@@ -114,49 +114,58 @@ class TopupController extends Controller
         $request->validate([
             'user_id_game' => ['required', 'string', 'max:100'],
             'package_id'   => ['required', 'integer'],
+            'quantity'     => ['required', 'integer', 'min:1', 'max:10'],
         ], [
             'user_id_game.required' => 'ID akun wajib diisi.',
             'package_id.required'   => 'Pilih paket terlebih dahulu.',
+            'quantity.required'     => 'Jumlah pembelian wajib diisi.',
+            'quantity.min'          => 'Jumlah minimal 1.',
+            'quantity.max'          => 'Jumlah maksimal 10.',
         ]);
 
-        $user    = Auth::user();
-        $package = collect($packages)->firstWhere('id', (int) $request->package_id);
+        $user     = Auth::user();
+        $package  = collect($packages)->firstWhere('id', (int) $request->package_id);
+        $qty      = (int) $request->quantity;
 
         if (! $package) {
             return back()->with('error', 'Paket tidak ditemukan.');
         }
 
-        if ($user->saldo < $package['amount']) {
+        $total = $package['amount'] * $qty;
+
+        if ($user->saldo < $total) {
             return back()->with('error', 'Saldo tidak mencukupi.')->withInput();
         }
 
-        DB::transaction(function () use ($user, $package, $gameName, $request) {
-            $user->decrement('saldo', $package['amount']);
+        $itemLabel = $qty > 1 ? $package['label'] . ' ×' . $qty : $package['label'];
+
+        DB::transaction(function () use ($user, $package, $gameName, $request, $qty, $total, $itemLabel) {
+            $user->decrement('saldo', $total);
             $user->refresh();
 
             Transaction::create([
                 'user_id'        => $user->id,
                 'game'           => $gameName,
-                'item'           => $package['label'],
+                'item'           => $itemLabel,
                 'user_id_game'   => $request->user_id_game,
                 'payment_method' => 'saldo',
                 'admin_fee'      => 0,
-                'amount'         => $package['amount'],
+                'amount'         => $total,
                 'status'         => 'success',
             ]);
 
             SaldoHistory::create([
                 'user_id'       => $user->id,
                 'type'          => 'purchase',
-                'description'   => 'Pembelian ' . $package['label'] . ' ' . $gameName,
-                'amount'        => -$package['amount'],
+                'description'   => 'Pembelian ' . $itemLabel . ' ' . $gameName,
+                'amount'        => -$total,
                 'balance_after' => $user->saldo,
                 'status'        => 'success',
             ]);
         });
 
         return redirect()->route('dashboard')
-            ->with('success', 'Top-up ' . $package['label'] . ' ' . $gameName . ' berhasil! 🎉');
+            ->with('success', 'Top-up ' . $itemLabel . ' ' . $gameName . ' berhasil! 🎉');
     }
 
     // ── Mobile Legends ───────────────────────────────────────────────────────
@@ -174,44 +183,53 @@ class TopupController extends Controller
             'user_id_game' => ['required', 'string', 'max:50'],
             'zone_id'      => ['required', 'string', 'max:20'],
             'package_id'   => ['required', 'integer'],
+            'quantity'     => ['required', 'integer', 'min:1', 'max:10'],
         ], [
             'user_id_game.required' => 'User ID wajib diisi.',
             'zone_id.required'      => 'Zone ID wajib diisi.',
             'package_id.required'   => 'Pilih paket terlebih dahulu.',
+            'quantity.required'     => 'Jumlah pembelian wajib diisi.',
+            'quantity.min'          => 'Jumlah minimal 1.',
+            'quantity.max'          => 'Jumlah maksimal 10.',
         ]);
 
-        $user    = Auth::user();
-        $package = collect($this->mlPackages)->firstWhere('id', (int) $request->package_id);
+        $user      = Auth::user();
+        $package   = collect($this->mlPackages)->firstWhere('id', (int) $request->package_id);
+        $qty       = (int) $request->quantity;
 
         if (! $package) return back()->with('error', 'Paket tidak ditemukan.');
-        if ($user->saldo < $package['amount']) return back()->with('error', 'Saldo tidak mencukupi.')->withInput();
 
-        DB::transaction(function () use ($user, $package, $request) {
-            $user->decrement('saldo', $package['amount']);
+        $total     = $package['amount'] * $qty;
+        $itemLabel = $qty > 1 ? $package['label'] . ' ×' . $qty : $package['label'];
+
+        if ($user->saldo < $total) return back()->with('error', 'Saldo tidak mencukupi.')->withInput();
+
+        DB::transaction(function () use ($user, $package, $request, $qty, $total, $itemLabel) {
+            $user->decrement('saldo', $total);
             $user->refresh();
 
             Transaction::create([
                 'user_id'        => $user->id,
                 'game'           => 'Mobile Legends',
-                'item'           => $package['label'],
+                'item'           => $itemLabel,
                 'user_id_game'   => $request->user_id_game . '/' . $request->zone_id,
                 'payment_method' => 'saldo',
                 'admin_fee'      => 0,
-                'amount'         => $package['amount'],
+                'amount'         => $total,
                 'status'         => 'success',
             ]);
 
             SaldoHistory::create([
                 'user_id'       => $user->id,
                 'type'          => 'purchase',
-                'description'   => 'Pembelian ' . $package['label'] . ' Mobile Legends',
-                'amount'        => -$package['amount'],
+                'description'   => 'Pembelian ' . $itemLabel . ' Mobile Legends',
+                'amount'        => -$total,
                 'balance_after' => $user->saldo,
                 'status'        => 'success',
             ]);
         });
 
-        return redirect()->route('dashboard')->with('success', 'Top-up ' . $package['label'] . ' Mobile Legends berhasil! 🎉');
+        return redirect()->route('dashboard')->with('success', 'Top-up ' . $itemLabel . ' Mobile Legends berhasil! 🎉');
     }
 
     // ── Free Fire ────────────────────────────────────────────────────────────

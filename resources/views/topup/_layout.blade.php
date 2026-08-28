@@ -94,7 +94,8 @@
         <div class="section-label">Pilih Nominal</div>
         <div class="pkg-grid" id="pkgGrid">
             @foreach($packages as $pkg)
-                <label class="pkg-card {{ old('package_id') == $pkg['id'] ? 'selected' : '' }}">
+                <label class="pkg-card {{ old('package_id') == $pkg['id'] ? 'selected' : '' }}"
+                       data-amount="{{ $pkg['amount'] }}">
                     <input
                         type="radio"
                         name="package_id"
@@ -107,6 +108,25 @@
                 </label>
             @endforeach
         </div>
+
+        <!-- Jumlah Pembelian -->
+        <div class="section-label">Jumlah Pembelian</div>
+        <div class="qty-row">
+            <div class="qty-wrap">
+                <button type="button" class="qty-btn" id="qtyMinus" aria-label="Kurangi">
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <input type="number" name="quantity" id="qtyInput"
+                       value="{{ old('quantity', 1) }}" min="1" max="10" readonly>
+                <button type="button" class="qty-btn" id="qtyPlus" aria-label="Tambah">
+                    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+            </div>
+            <div class="qty-total">
+                Total: <span id="qtyTotal">—</span>
+            </div>
+        </div>
+        @error('quantity') <p class="field-error-msg" style="margin-bottom:16px">{{ $message }}</p> @enderror
 
         <button type="submit" class="btn-topup">Beli Sekarang</button>
     </form>
