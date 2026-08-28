@@ -102,8 +102,15 @@
 .game-name {
     font-size: 12.5px; font-weight: 600;
     color: #ffffff; margin-bottom: 3px;
+    word-break: break-word;
 }
 .game-desc { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+@media (max-width: 400px) {
+    .game-card { padding: 14px 10px; }
+    .game-name { font-size: 11.5px; }
+    .game-icon { width: 44px; height: 44px; }
+}
 
 /* ── Tabel transaksi ── */
 .tx-wrap {

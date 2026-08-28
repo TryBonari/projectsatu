@@ -55,19 +55,19 @@
             <div class="game-name">Free Fire</div>
             <div class="game-desc">Diamond</div>
         </a>
-        <a href="{{ route('topup.pubg') }}" class="game-card">
-            <div class="game-icon">
-                <img src="{{ asset('images/games/pubg.png') }}" alt="PUBG Mobile">
-            </div>
-            <div class="game-name">PUBG Mobile</div>
-            <div class="game-desc">UC</div>
-        </a>
         <a href="{{ route('topup.genshin') }}" class="game-card">
             <div class="game-icon">
                 <img src="{{ asset('images/games/genshin.png') }}" alt="Genshin Impact">
             </div>
             <div class="game-name">Genshin Impact</div>
             <div class="game-desc">Genesis Crystal</div>
+        </a>
+        <a href="{{ route('topup.pubg') }}" class="game-card">
+            <div class="game-icon">
+                <img src="{{ asset('images/games/pubg.png') }}" alt="PUBG Mobile">
+            </div>
+            <div class="game-name">PUBG Mobile</div>
+            <div class="game-desc">UC</div>
         </a>
         <a href="{{ route('topup.valorant') }}" class="game-card">
             <div class="game-icon">
