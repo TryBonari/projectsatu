@@ -50,7 +50,7 @@
         </a>
         <a href="{{ route('topup.ff') }}" class="game-card">
             <div class="game-icon">
-                <img src="{{ asset('images/games/free-fire.png') }}" alt="Free Fire">
+                <img src="{{ asset('images/games/freefire.png') }}" alt="Free Fire">
             </div>
             <div class="game-name">Free Fire</div>
             <div class="game-desc">Diamond</div>
