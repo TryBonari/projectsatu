@@ -109,9 +109,9 @@
 .qty-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
     margin-bottom: 24px;
-    flex-wrap: wrap;
 }
 .qty-wrap {
     display: flex;
@@ -121,6 +121,7 @@
     border-radius: 10px;
     overflow: hidden;
     background: rgba(255,255,255,0.04);
+    flex-shrink: 0;
 }
 .qty-btn {
     width: 40px; height: 40px;
@@ -159,6 +160,8 @@
 .qty-total {
     font-size: 13.5px;
     color: rgba(255,255,255,0.45);
+    text-align: right;
+    white-space: nowrap;
 }
 .qty-total span {
     font-weight: 700;
