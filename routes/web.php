@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Route;
 // ── Root ─────────────────────────────────────────────────────────────────────
 Route::get('/', fn () => redirect()->route('login'));
 
+// ── Legal (publik) ───────────────────────────────────────────────────────────
+Route::get('/terms',   fn () => view('terms'))->name('terms');
+Route::get('/privacy', fn () => view('privacy'))->name('privacy');
+
 // ── Auth ─────────────────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('/login',    [AuthController::class, 'loginForm'])->name('login');

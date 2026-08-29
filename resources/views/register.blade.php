@@ -160,7 +160,7 @@
         <!-- Terms -->
         <label class="terms">
             <input type="checkbox" name="terms" required>
-            <span>Saya setuju dengan <a href="#">Syarat &amp; Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> NexaTopUp</span>
+            <span>Saya setuju dengan <a href="{{ route('terms') }}" target="_blank">Syarat &amp; Ketentuan</a> dan <a href="{{ route('privacy') }}" target="_blank">Kebijakan Privasi</a> NexaTopUp</span>
         </label>
 
         <button type="submit" class="btn-primary">Buat Akun</button>
